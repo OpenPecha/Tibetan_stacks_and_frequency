@@ -79,7 +79,7 @@ def get_stacks_info(data):
 
 
 def main():
-    filename = "norbuketaka.csv"
+    filename = "derge_tenjur.csv"
     freq_dir = Path("./data/frequency/")
     filtered_dir = Path("./data/filtered_stack_freq/")
     csv_file = freq_dir / filename

@@ -38,7 +38,7 @@ def get_stacks_csv(data_path):
     return stack_csv
 
 def main():
-    csv_name = "google_books.csv"
+    csv_name = "derge_tenjur.csv"
     transcript_dir = Path("./data/transcripts/")
     freq_dir = Path("./data/frequency/")
     filtered_dir = Path("./data/filtered_stack_freq/")
@@ -47,6 +47,7 @@ def main():
     frequency_path = freq_dir / csv_name
 
     stack_csv = get_stacks_csv(data_path)
+    create_csv(frequency_path, stack_csv)
     valid_stacks, invalid_stacks = get_stacks_info(stack_csv)
 
     create_csv(frequency_path, stack_csv)
