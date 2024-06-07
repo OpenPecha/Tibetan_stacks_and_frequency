@@ -31,28 +31,33 @@ def count_the_stacks(stacks):
 def get_stacks_csv(data_path):
     with open(data_path, "r") as f:
         data = f.read().splitlines()
-        for row in data[1:]:
+        for row in data[2:]:
+            image_name = row.split(",")[0]
+            print(image_name)
             text = row.split(",")[-1]
-            stacks = get_tokenized_stacks(text)
-            stack_csv = count_the_stacks(stacks)
+            if text:
+                stacks = get_tokenized_stacks(text)
+                stack_csv = count_the_stacks(stacks)
     return stack_csv
 
+
+def write_csv(filename, data):
+    with open(filename, "w") as f:
+        f.write("Stack, Frequency\n")
+        for stack, frequency in data.items():
+            f.write(f"{stack},{frequency}\n")
+
+
 def main():
-    csv_name = "derge_tenjur.csv"
+    csv_name = "LM_etexts.csv"
     transcript_dir = Path("./data/transcripts/")
     freq_dir = Path("./data/frequency/")
-    filtered_dir = Path("./data/filtered_stack_freq/")
     
     data_path = transcript_dir / csv_name
     frequency_path = freq_dir / csv_name
 
     stack_csv = get_stacks_csv(data_path)
-    create_csv(frequency_path, stack_csv)
-    valid_stacks, invalid_stacks = get_stacks_info(stack_csv)
-
-    create_csv(frequency_path, stack_csv)
-    create_csv(filtered_dir / csv_name, valid_stacks)
-    create_csv(filtered_dir / csv_name, invalid_stacks)
+    write_csv(frequency_path, stack_csv)
 
 
 

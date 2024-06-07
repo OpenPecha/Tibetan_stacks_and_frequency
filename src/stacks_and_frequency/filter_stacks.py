@@ -43,6 +43,8 @@ $
 '''
 
 
+filtered_dir = Path("./data/filtered_stack_freq/")
+
 def is_valid_tibetan(stack):
     """
     Check if the given Tibetan stack is valid based on defined constraints.
@@ -55,11 +57,11 @@ def is_valid_tibetan(stack):
 
 def create_csv(csv_path, stacks):
     csv_path.parent.mkdir(parents=True, exist_ok=True)
-    stacks_sorted = sorted(stacks, key=lambda x: int(x[1]), reverse=True)
+    sorted_stacks = sorted(stacks, key=lambda x: int(x[1]), reverse=True)
     
     with open(csv_path, "w", encoding="utf-8") as f:
         f.write("Stack, Frequency\n")
-        for stack, frequency in stacks_sorted:
+        for stack, frequency in sorted_stacks:
             f.write(f"{stack},{frequency}\n")
 
 
@@ -79,7 +81,7 @@ def get_stacks_info(data):
 
 
 def main():
-    filename = "derge_tenjur.csv"
+    filename = "LM_etexts.csv"
     freq_dir = Path("./data/frequency/")
     filtered_dir = Path("./data/filtered_stack_freq/")
     csv_file = freq_dir / filename
